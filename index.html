@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>生日快乐！</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0, #ffafbd, #d4a5ff);
+      background-size: 400% 400%;
+      font-family: "Microsoft YaHei", sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      animation: gradientBG 12s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2.2em;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      animation-delay: 0.5s;
+    }
+
+    .cake {
+      font-size: 5em;
+      margin: 20px 0;
+      opacity: 0;
+      animation: floatUp 3s ease-in-out infinite alternate, fadeIn 1.5s forwards;
+    }
+
+    p {
+      font-size: 1.3em;
+      max-width: 85%;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      animation-delay: 1s;
+      line-height: 1.6;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); }
+      to { transform: translateY(-20px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="cake">🎂</div>
+  <h1>马悦超级无敌可爱美少女</h1>
+  <p>生日快乐哦！希望以后的每一天都是超级开心鸭～ 🎉💖</p>
+</body>
+</html> 
