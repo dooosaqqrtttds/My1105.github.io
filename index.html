@@ -3,168 +3,136 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>生日快乐！</title>
     <style>
-        body {
-            background: linear-gradient(135deg, #ffafbd, #ffc3a0, #ffafbd, #d4a5ff);
-            background-size: 400% 400%;
-            font-family: "Microsoft YaHei", sans-serif;
-            text-align: center;
-            padding: 20px;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: #5a3e3e;
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #fff;
-            animation: gradientBG 12s ease infinite;
-            position: relative;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
-        /* 背景渐变动效 */
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
+        h1 {
+            font-size: 4vw;
+            /* 减小标题字体大小 */
+            margin: 20px 0;
+            color: #d6336c;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: glow 2s infinite alternate;
+        }
+
+        .date {
+            font-size: 3vw;
+            /* 调整日期字体大小 */
+            margin-bottom: 20px;
+            color: #e84393;
+            font-weight: bold;
+        }
+
+        .wish {
+            font-size: 3.5vw;
+            /* 减小祝福文字字体大小 */
+            line-height: 1.5;
+            margin: 20px;
+            color: #5a3e3e;
+            padding: 0 10px;
+        }
+
+        .cake {
+            font-size: 10vw;
+            /* 减小蛋糕图标字体大小 */
+            margin: 20px 0;
+            animation: float 3s ease-in-out infinite;
+            color: #ff6b9d;
+        }
+
+        .heart {
+            position: absolute;
+            top: -20px;
+            font-size: 4vw;
+            /* 减小爱心字体大小 */
+            opacity: 0;
+            animation: fall linear forwards;
+            z-index: 1;
+            color: #ff6b9d;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
             }
 
             50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
+                transform: translateY(-10px);
             }
         }
 
-        /* 飘落彩带 */
-        .confetti {
-            position: absolute;
-            top: -20px;
-            width: 10px;
-            height: 30px;
-            background: #ff0;
-            opacity: 0.8;
-            animation: fall linear forwards;
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(214, 51, 108, 0.4);
+            }
+
+            to {
+                text-shadow: 0 0 15px rgba(232, 67, 147, 0.6);
+            }
         }
 
         @keyframes fall {
             to {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* 闪烁星星 */
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle var(--duration, 3s) infinite ease-in-out;
-            opacity: 0;
-        }
-
-        @keyframes twinkle {
-
-            0%,
-            100% {
-                opacity: 0;
-            }
-
-            50% {
+                top: 100vh;
                 opacity: 1;
-            }
-        }
-
-        h1 {
-            font-size: 2.4em;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 0.5s;
-            margin: 10px 0;
-        }
-
-        .cake {
-            font-size: 8em;
-            /* 增大蛋糕 */
-            margin: 20px 0;
-            opacity: 0;
-            animation: floatUp 3s ease-in-out infinite alternate, fadeIn 1.5s forwards;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-        }
-
-        p {
-            font-size: 1.3em;
-            max-width: 85%;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 1s;
-            line-height: 1.6;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes floatUp {
-            from {
-                transform: translateY(0);
-            }
-
-            to {
-                transform: translateY(-20px);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- 动态生成彩带和星星（用 JS 轻量实现） -->
+    <div id="hearts"></div>
+    <div class="container">
+        <div class="cake">🎂</div>
+        <h1>祝 超级无敌宇宙美仙女 马悦 生日快乐！</h1>
+        <div class="date">2025年11月5日</div>
+        <p class="wish">愿你永远被星辰宠爱，被爱包围，闪闪发光如银河中最亮的星！✨💖</p>
+    </div>
+
     <script>
-        // 创建彩带
-        for (let i = 0; i < 30; i++) {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.backgroundColor = ['#ff0', '#f0f', '#0ff', '#0f0', '#f00'][Math.floor(Math.random() * 5)];
-            confetti.style.width = (Math.random() * 8 + 4) + 'px';
-            confetti.style.height = (Math.random() * 20 + 10) + 'px';
-            confetti.style.animationDuration = (Math.random() * 5 + 3) + 's';
-            confetti.style.animationDelay = Math.random() * 2 + 's';
-            document.body.appendChild(confetti);
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💖';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 6 + 4) + 'vw'; // 更新字体大小范围
+            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 10000);
         }
-
-        // 创建闪烁星星
-        for (let i = 0; i < 20; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.width = (Math.random() * 6 + 2) + 'px';
-            star.style.height = star.style.width;
-            star.style.left = Math.random() * 100 + 'vw';
-            star.style.top = Math.random() * 100 + 'vh';
-            star.style.setProperty('--duration', (Math.random() * 4 + 2) + 's');
-            star.style.animationDelay = Math.random() * 2 + 's';
-            document.body.appendChild(star);
-        }
+        setInterval(createHeart, 400);
     </script>
-
-    <div class="cake">🎂</div>
-    <h1>超级无敌可爱美仙女</h1>
-    <p>Happy birthday to you~~~🎉🎉🎉</p>
-    <p>生日快乐哦！今天呢要多多开心一点鸭～ 🎉💖</p>
-   <p> 今天全世界都要对你好一点！🎉🎉🎉</p>
 </body>
 
 </html>
