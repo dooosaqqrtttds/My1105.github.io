@@ -1,73 +1,171 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>生日快乐！</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, #ffafbd, #ffc3a0, #ffafbd, #d4a5ff);
-      background-size: 400% 400%;
-      font-family: "Microsoft YaHei", sans-serif;
-      text-align: center;
-      padding: 40px 20px;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      animation: gradientBG 12s ease infinite;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生日快乐！</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0, #ffafbd, #d4a5ff);
+            background-size: 400% 400%;
+            font-family: "Microsoft YaHei", sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            animation: gradientBG 12s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* 背景渐变动效 */
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
 
-    h1 {
-      font-size: 2.2em;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-      opacity: 0;
-      animation: fadeIn 2s forwards;
-      animation-delay: 0.5s;
-    }
+            50% {
+                background-position: 100% 50%;
+            }
 
-    .cake {
-      font-size: 5em;
-      margin: 20px 0;
-      opacity: 0;
-      animation: floatUp 3s ease-in-out infinite alternate, fadeIn 1.5s forwards;
-    }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
-    p {
-      font-size: 1.3em;
-      max-width: 85%;
-      opacity: 0;
-      animation: fadeIn 2s forwards;
-      animation-delay: 1s;
-      line-height: 1.6;
-    }
-  
-    @keyframes floatUp {
-      from { transform: translateY(0); }
-      to { transform: translateY(-20px); }
-    }
+        /* 飘落彩带 */
+        .confetti {
+            position: absolute;
+            top: -20px;
+            width: 10px;
+            height: 30px;
+            background: #ff0;
+            opacity: 0.8;
+            animation: fall linear forwards;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 闪烁星星 */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 3s) infinite ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 2.4em;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 0.5s;
+            margin: 10px 0;
+        }
+
+        .cake {
+            font-size: 8em;
+            /* 增大蛋糕 */
+            margin: 20px 0;
+            opacity: 0;
+            animation: floatUp 3s ease-in-out infinite alternate, fadeIn 1.5s forwards;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        }
+
+        p {
+            font-size: 1.3em;
+            max-width: 85%;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 1s;
+            line-height: 1.6;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="cake">🎂</div>
-  <h1>超级无敌可爱美少女</h1>
-<p>Happy  birthday to you~~~🎉</p>
-  <p>Happy  birthday to you~~~🎉</p>
-    <p>Happy  birthday to you~~~🎉</p>
-  <p>生日快乐哦！希望以后的每一天都是超级开心鸭～ 🎉💖</p>
+    <!-- 动态生成彩带和星星（用 JS 轻量实现） -->
+    <script>
+        // 创建彩带
+        for (let i = 0; i < 30; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = ['#ff0', '#f0f', '#0ff', '#0f0', '#f00'][Math.floor(Math.random() * 5)];
+            confetti.style.width = (Math.random() * 8 + 4) + 'px';
+            confetti.style.height = (Math.random() * 20 + 10) + 'px';
+            confetti.style.animationDuration = (Math.random() * 5 + 3) + 's';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(confetti);
+        }
+
+        // 创建闪烁星星
+        for (let i = 0; i < 20; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = (Math.random() * 6 + 2) + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.setProperty('--duration', (Math.random() * 4 + 2) + 's');
+            star.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(star);
+        }
+    </script>
+
+    <div class="cake">🎂</div>
+    <h1>超级无敌可爱美仙女</h1>
+    <p>Happy birthday to you~~~🎉🎉🎉</p>
+    <p>Happy birthday to you~~~🎉🎉🎉</p>
+    <p>Happy birthday to you~~~🎉🎉🎉</p>
+    <p>生日快乐哦！希望以后的每一天都是超级开心鸭～ 🎉💖</p>
 </body>
-</html> 
+
+</html>
